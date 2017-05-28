@@ -16,6 +16,7 @@ namespace ComponentMap
 {
     public partial class MapDialog : CommonDialog
     {
+
         public MapDialog()
         {
             InitializeComponent();
@@ -36,12 +37,19 @@ namespace ComponentMap
         {
             using (MapForm f = new MapForm(this))
                 return f.ShowDialog() == DialogResult.OK;
-            
         }
 
-        public void MouseMove(object sender, MouseEventArgs e)
-        {
+        [DefaultValue("")]
+        [Category("Страна")]
+        [Description("Выбранная страна.")]
+        public string SelectedCountry { get; set; }
+        
+        [Description("Выполняется при наведении на страну.")]
+        public event EventHandler MouseMove;
 
+        public void MouseMoveEvent(object sender, MouseEventArgs e)
+        {
+            MouseMove(this, new EventArgs());
         }
     }
 }

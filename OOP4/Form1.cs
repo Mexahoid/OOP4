@@ -30,6 +30,7 @@ namespace OOP4
         private void button1_Click(object sender, EventArgs e)
         {
             mapDialog1.ShowDialog();
+            label1.Text = mapDialog1.SelectedCountry;
         }
     }
 }
