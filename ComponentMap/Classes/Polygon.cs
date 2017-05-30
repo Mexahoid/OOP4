@@ -8,22 +8,24 @@ namespace ComponentMap
 {
     class Polygon
     {
-        protected List<Tuple<int, int>> _coords;
+        protected List<Point> _coords;
         public bool Selected { get; protected set; }
-        public event Action<Graphics> DrawEvent;
+        public event Action<List<Point>> DrawEvent;
+
         public Action<bool> Selection
         {
             get
             {
-                return (bool Select) => { Selected = true; };
+                return (bool Select) => { Selected = Select; };
             }
         }
+
         protected Polygon()
         {
 
         }
 
-        public Polygon(List<Tuple<int, int>> Coords, Action<Graphics> Del)
+        public Polygon(List<Point> Coords, Action<List<Point>> Del)
         {
             _coords = Coords;
             DrawEvent += Del;
@@ -34,15 +36,18 @@ namespace ComponentMap
             bool isInside = false;
             int C = _coords.Count;
             for (int i = 0, j = C - 1; i < C; j = i++)
-                if (((_coords[i].Item2 > Y) != (_coords[j].Item2 > Y)) &&
-                (X < (_coords[j].Item1 - _coords[i].Item1) * (Y - _coords[i].Item2) / (_coords[j].Item2 - _coords[i].Item2) + _coords[i].Item1))
+                if (((_coords[i].Y > Y) != (_coords[j].Y > Y)) &&
+                (X < (_coords[j].X - _coords[i].X) * (Y - _coords[i].Y) / (_coords[j].Y - _coords[i].Y) + _coords[i].X))
                     isInside = !isInside;
             Selected = isInside;
         }
 
         public virtual void Draw()
         {
-            //DrawEvent();
+            if (Selected)
+            {
+                DrawEvent(_coords);
+            }
         }
     }
 }

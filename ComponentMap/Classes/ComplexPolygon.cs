@@ -11,13 +11,20 @@ namespace ComponentMap
         private List<Polygon> _polygons;
         private int _count;
         private event Action<bool> _MassSelect;
+        private event Action _Clear;
+        private string _data;
+        public string Name { get; set; }
 
-        public ComplexPolygon(List<Tuple<int, int>> Coords, Action<Graphics> Del, List<int> Boundaries) : base()
+        public ComplexPolygon(List<Point> Coords, Action<List<Point>> Del,
+            List<int> Boundaries, Action Clear, string[] Data) : base()
         {
-            _count = Boundaries.Count - 1;
+            _data = Data[1];
+            Name = Data[0];
+            _Clear += Clear;
+            _count = Boundaries.Count;
             _polygons = new List<Polygon>();
             //Используется только тут
-            _coords = new List<Tuple<int, int>>();
+            _coords = new List<Point>();
             int j = 0;
             for (int i = 0; i < _count; i++)
             {
@@ -25,15 +32,18 @@ namespace ComponentMap
                 {
                     _coords.Add(Coords[j]);
                 }
-                _polygons[i] = new Polygon(_coords, Del);
+                _polygons.Add(new Polygon(_coords, Del));
                 _MassSelect += _polygons[i].Selection;
+                _coords = new List<Point>();
             }
-            _coords = null;
         }
 
         public override void Draw()
         {
-            base.Draw();
+            for (int i = 0; i < _count; i++)
+            {
+                _polygons[i].Draw();
+            }
         }
 
         public override void MouseFocus(int X, int Y)
@@ -44,6 +54,7 @@ namespace ComponentMap
                 if (_polygons[i].Selected)
                 {
                     Selected = true;
+                    _MassSelect(Selected);
                     break;
                 }
             }

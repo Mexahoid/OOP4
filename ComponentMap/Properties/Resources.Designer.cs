@@ -61,12 +61,123 @@ namespace ComponentMap.Properties {
         }
         
         /// <summary>
+        ///   Ищет локализованную строку, похожую на .
+        /// </summary>
+        internal static string Australia {
+            get {
+                return ResourceManager.GetString("Australia", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на .
+        /// </summary>
+        internal static string Canada {
+            get {
+                return ResourceManager.GetString("Canada", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на .
+        /// </summary>
+        internal static string China {
+            get {
+                return ResourceManager.GetString("China", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на .
+        /// </summary>
+        internal static string Greenland {
+            get {
+                return ResourceManager.GetString("Greenland", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Поиск локализованного ресурса типа System.Drawing.Bitmap.
         /// </summary>
         internal static System.Drawing.Bitmap Map {
             get {
                 object obj = ResourceManager.GetObject("Map", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на 15
+        ///458 182
+        ///456 183
+        ///453 185
+        ///453 190
+        ///453 191
+        ///457 191
+        ///459 191
+        ///461 191
+        ///463 191
+        ///464 189
+        ///465 187
+        ///465 185
+        ///464 183
+        ///461 182
+        ///457 180
+        ///467 130
+        ///464 134
+        ///466 139
+        ///468 144
+        ///471 152
+        ///472 154
+        ///473 157
+        ///470 162
+        ///469 167
+        ///469 171
+        ///468 175
+        ///471 180
+        ///476 183
+        ///478 187
+        ///481 193
+        ///484 194
+        ///487 196
+        ///489 198
+        ///491 201
+        ///496 202
+        ///500 202
+        ///501 208
+        ///496 213
+        ///493 217
+        ///495 224
+        ///501 226
+        ///505 226
+        ///509 227
+        ///515 229
+        ///517 230
+        ///524 231
+        ///520 230
+        ///521 227
+        ///520 223
+        ///518 221
+        ///518 216
+        ///520 214
+        ///521 213
+        ///515 207
+        ///516 202
+        ///522 196
+        ///532  [остаток строки не уместился]&quot;;.
+        /// </summary>
+        internal static string Russia {
+            get {
+                return ResourceManager.GetString("Russia", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на .
+        /// </summary>
+        internal static string USA {
+            get {
+                return ResourceManager.GetString("USA", resourceCulture);
             }
         }
     }

@@ -43,6 +43,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Classes\ComplexPolygon.cs" />
+    <Compile Include="Classes\Drawer.cs" />
     <Compile Include="MapDialog.cs">
       <SubType>Component</SubType>
     </Compile>

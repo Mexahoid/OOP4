@@ -14,6 +14,7 @@ namespace OOP4
     {
         private Graphics _canvas;
         private Bitmap _tb;
+        private BindingSource _b;
         public Form1()
         {
             InitializeComponent();
@@ -30,7 +31,11 @@ namespace OOP4
         private void button1_Click(object sender, EventArgs e)
         {
             mapDialog1.ShowDialog();
-            label1.Text = mapDialog1.SelectedCountry;
+        }
+
+        private void mapDialog1_MouseMove(object sender, EventArgs e)
+        {
+
         }
     }
 }

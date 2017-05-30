@@ -16,7 +16,6 @@ namespace ComponentMap
 {
     public partial class MapDialog : CommonDialog
     {
-
         public MapDialog()
         {
             InitializeComponent();

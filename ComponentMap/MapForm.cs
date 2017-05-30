@@ -13,29 +13,27 @@ namespace ComponentMap
     {
         private MapDialog md;
         private List<Point> Arr;
+        private Drawer _drawer;
         private Graphics g;
         private Graphics f;
         private Bitmap bm;
-
+        
         public MapForm(MapDialog md)
         {
             InitializeComponent();
-            //bm = new Bitmap(Properties.Resources.Map);
-            bm = new Bitmap(852, 560);
+            //bm = new Bitmap(852, 560);
             //CtrlPanel.CreateGraphics().DrawImage(bm, 0, 0);
-            g = Graphics.FromImage(bm);
-            f = CtrlPanel.CreateGraphics();
+            //g = Graphics.FromImage(bm);
+            //f = CtrlPanel.CreateGraphics();
+            _drawer = new Drawer(CtrlPanel.CreateGraphics());
+            _drawer.Draw();
             this.md = md;
+            Arr = new List<Point>();
         }
 
         private void MapForm_MouseMove(object sender, MouseEventArgs e)
         {
             //md.MouseMove(sender, e);
-        }
-
-        private void MapForm_MouseDown(object sender, MouseEventArgs e)
-        {
-            Arr.Add(new Point(e.X, e.Y));
         }
 
         private void MapForm_FormClosed(object sender, FormClosedEventArgs e)
@@ -45,7 +43,7 @@ namespace ComponentMap
                  int C = Arr.Count;
                  for (int i = 0; i < C; i++)
                  {
-                     sw.WriteLine(Arr[i].Item1 + " " + Arr[i].Item2);
+                     sw.WriteLine(Arr[i].X + " " + Arr[i].Y);
                  }
                  sw.Close();
              }*/
@@ -53,7 +51,7 @@ namespace ComponentMap
 
         private void Action()
         {
-            Arr = new List<Point>();
+            /*Arr = new List<Point>();
             using (System.IO.StreamReader sw = new System.IO.StreamReader("coords.txt"))
             {
                 string Ass;
@@ -65,16 +63,27 @@ namespace ComponentMap
                     Temp = Ass.Split(' ');
                     Arr.Add(new Point(int.Parse(Temp[0]), int.Parse(Temp[1])));
                 }
-            }
-            g.FillPolygon(Brushes.Green, Arr.ToArray());
+            }*/
         }
 
         protected override void OnPaint(PaintEventArgs e)
         {
-            g.DrawImage(Properties.Resources.Map, 0, 0);
-            Action();
-            f.DrawImage(bm, 0, 0);
+            //g.DrawImage(Properties.Resources.Map, 0, 0);
+            //Action();
+            //f.DrawImage(bm, 0, 0);
+            _drawer.Draw();
             base.OnPaint(e);
+        }
+
+        private void CtrlPanel_MouseMove(object sender, MouseEventArgs e)
+        {
+            _drawer.MouseFocus(e.X, e.Y);
+            _drawer.Draw();
+        }
+
+        private void CtrlPanel_MouseDown(object sender, MouseEventArgs e)
+        {
+            //Arr.Add(new Point(e.X, e.Y));
         }
     }
 }
