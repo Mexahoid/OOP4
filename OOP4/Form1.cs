@@ -30,12 +30,17 @@ namespace OOP4
         
         private void button1_Click(object sender, EventArgs e)
         {
-            mapDialog1.ShowDialog();
+            mapDialog1.SD(SetText);
         }
 
         private void mapDialog1_MouseMove(object sender, EventArgs e)
         {
 
+        }
+
+        private void SetText(string Text)
+        {
+            label1.Text = Text;
         }
     }
 }

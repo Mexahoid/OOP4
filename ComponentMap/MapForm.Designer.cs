@@ -29,7 +29,7 @@
         private void InitializeComponent()
         {
             this.CtrlPanel = new System.Windows.Forms.Panel();
-            this.CtrlLBx = new System.Windows.Forms.ListBox();
+            this.CtrlTxB = new System.Windows.Forms.TextBox();
             this.SuspendLayout();
             // 
             // CtrlPanel
@@ -41,32 +41,33 @@
             this.CtrlPanel.MouseDown += new System.Windows.Forms.MouseEventHandler(this.CtrlPanel_MouseDown);
             this.CtrlPanel.MouseMove += new System.Windows.Forms.MouseEventHandler(this.CtrlPanel_MouseMove);
             // 
-            // CtrlLBx
+            // CtrlTxB
             // 
-            this.CtrlLBx.FormattingEnabled = true;
-            this.CtrlLBx.Location = new System.Drawing.Point(849, 0);
-            this.CtrlLBx.Name = "CtrlLBx";
-            this.CtrlLBx.Size = new System.Drawing.Size(153, 563);
-            this.CtrlLBx.TabIndex = 1;
+            this.CtrlTxB.Location = new System.Drawing.Point(858, 0);
+            this.CtrlTxB.Multiline = true;
+            this.CtrlTxB.Name = "CtrlTxB";
+            this.CtrlTxB.Size = new System.Drawing.Size(144, 560);
+            this.CtrlTxB.TabIndex = 1;
             // 
             // MapForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1001, 560);
-            this.Controls.Add(this.CtrlLBx);
+            this.Controls.Add(this.CtrlTxB);
             this.Controls.Add(this.CtrlPanel);
             this.Name = "MapForm";
             this.Text = "Карта мира";
             this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.MapForm_FormClosed);
             this.MouseMove += new System.Windows.Forms.MouseEventHandler(this.MapForm_MouseMove);
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
         #endregion
 
         private System.Windows.Forms.Panel CtrlPanel;
-        private System.Windows.Forms.ListBox CtrlLBx;
+        private System.Windows.Forms.TextBox CtrlTxB;
     }
 }

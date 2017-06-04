@@ -13,13 +13,17 @@ namespace ComponentMap
         private Bitmap _btm;
         private List<Polygon> _polygons;
         private int _count;
+        private Action<string> _changer;
+        private  Action<string> _countryChange;
 
-        public Drawer(Graphics CanvGraph)
+        public Drawer(Graphics CanvGraph, Action<string> ChangeText, Action<string> ChangeCountry)
         {
+            _countryChange = ChangeCountry;
             _outerGraph = CanvGraph;
             _btm = new Bitmap(852, 560);
             _innerGraph = Graphics.FromImage(_btm);
             _polygons = new List<Polygon>();
+            _changer = ChangeText;
             Parse();
         }
 
@@ -34,8 +38,8 @@ namespace ComponentMap
             for (int i = 0; i < _count; i++)
             {
                 _polygons[i].MouseFocus(X, Y);
-                if (_polygons[i].Selected)
-                    break;
+               // if (_polygons[i].Selected)
+                    //break;
             }
         }
 
@@ -47,10 +51,10 @@ namespace ComponentMap
 
         public void Draw()
         {
-            for (int i = 0; i < _count; i++)
+          /*  for (int i = 0; i < _count; i++)
             {
                 _polygons[i].Draw();
-            }
+            }*/
             _outerGraph.DrawImage(_btm, 0, 0);
         }
 
@@ -88,9 +92,9 @@ namespace ComponentMap
                     SR.Close();
                     _count++;
                     if (C != 1)
-                        _polygons.Add(new ComplexPolygon(coords, Drawing, Bounds, Clear, Data));
+                        _polygons.Add(new ComplexPolygon(coords, Drawing, Bounds, Clear, Data, _changer, _countryChange));
                     else
-                        _polygons.Add(new Polygon(coords, Drawing));
+                        _polygons.Add(new Polygon(coords, Drawing, _changer, Data, _countryChange));
                 }
                 catch
                 {

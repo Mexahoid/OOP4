@@ -9,8 +9,28 @@ namespace ComponentMap
     class Polygon
     {
         protected List<Point> _coords;
-        public bool Selected { get; protected set; }
+        protected bool _selected;
+        public virtual bool Selected
+        {
+            get
+            {
+                return _selected;
+            }
+            protected set
+            {
+                _selected = value;
+                if (value)
+                {
+                    DrawEvent(_coords);
+                    TextChanger(Name + "\n\n" + _data);
+                    
+                }
+            }
+        }
         public event Action<List<Point>> DrawEvent;
+        private event Action<string> TextChanger;
+        protected string _data;
+        public string Name { get; set; }
 
         public Action<bool> Selection
         {
@@ -20,15 +40,25 @@ namespace ComponentMap
             }
         }
 
-        protected Polygon()
+        protected Polygon(Action<string> Changer, Action<string> LabelText)
         {
-
+            TextChanger += Changer;
+            TextChanger += LabelText;
         }
 
-        public Polygon(List<Point> Coords, Action<List<Point>> Del)
+        public Polygon(List<Point> Coords, Action<List<Point>> Del, Action<string> Changer, string[] Arr, Action<string> LabelText)
         {
+            Name = Arr[0];
+            _data = Arr[1];
             _coords = Coords;
             DrawEvent += Del;
+            TextChanger += Changer;
+            TextChanger += LabelText;
+        }
+
+        protected void Temp(string Inp)
+        {
+            TextChanger(Inp);
         }
 
         public virtual void MouseFocus(int X, int Y)
@@ -43,6 +73,15 @@ namespace ComponentMap
         }
 
         public virtual void Draw()
+        {
+            if (Selected)
+            {
+                //DrawEvent(_coords);
+                TextChanger(Name + "\n\n" + _data);
+            }
+        }
+
+        public void DrawWithoutText()
         {
             if (Selected)
             {

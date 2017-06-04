@@ -12,11 +12,27 @@ namespace ComponentMap
         private int _count;
         private event Action<bool> _MassSelect;
         private event Action _Clear;
-        private string _data;
-        public string Name { get; set; }
+        public override bool Selected {
+            get
+            {
+                return _selected;
+            }
+            protected set
+            {
+                _selected = value;
+                if (value)
+                {
+                    for (int i = 0; i < _count; i++)
+                    {
+                        _polygons[i].DrawWithoutText();
+                    }
+                    Temp(Name + "\n\n" + _data);
+                }
+            }
+        }
 
         public ComplexPolygon(List<Point> Coords, Action<List<Point>> Del,
-            List<int> Boundaries, Action Clear, string[] Data) : base()
+            List<int> Boundaries, Action Clear, string[] Data, Action<string> Changer, Action<string> LabelText) : base(Changer, LabelText)
         {
             _data = Data[1];
             Name = Data[0];
@@ -32,7 +48,7 @@ namespace ComponentMap
                 {
                     _coords.Add(Coords[j]);
                 }
-                _polygons.Add(new Polygon(_coords, Del));
+                _polygons.Add(new Polygon(_coords, Del, Changer, Data, LabelText));
                 _MassSelect += _polygons[i].Selection;
                 _coords = new List<Point>();
             }
@@ -42,8 +58,9 @@ namespace ComponentMap
         {
             for (int i = 0; i < _count; i++)
             {
-                _polygons[i].Draw();
+                _polygons[i].DrawWithoutText();
             }
+            Temp(Name + "\n\n" + _data);
         }
 
         public override void MouseFocus(int X, int Y)
@@ -53,8 +70,8 @@ namespace ComponentMap
                 _polygons[i].MouseFocus(X, Y);
                 if (_polygons[i].Selected)
                 {
+                    _MassSelect(true);
                     Selected = true;
-                    _MassSelect(Selected);
                     break;
                 }
             }

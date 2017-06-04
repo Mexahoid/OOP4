@@ -25,7 +25,7 @@ namespace ComponentMap
             //CtrlPanel.CreateGraphics().DrawImage(bm, 0, 0);
             //g = Graphics.FromImage(bm);
             //f = CtrlPanel.CreateGraphics();
-            _drawer = new Drawer(CtrlPanel.CreateGraphics());
+            _drawer = new Drawer(CtrlPanel.CreateGraphics(), ChangeText, md.ChangeText);
             _drawer.Draw();
             this.md = md;
             Arr = new List<Point>();
@@ -84,6 +84,14 @@ namespace ComponentMap
         private void CtrlPanel_MouseDown(object sender, MouseEventArgs e)
         {
             //Arr.Add(new Point(e.X, e.Y));
+        }
+
+        private void ChangeText(string Text)
+        {
+            if (Text != null)
+                CtrlTxB.Text = Text;
+            else
+                CtrlTxB.Text = "";
         }
     }
 }

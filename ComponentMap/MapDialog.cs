@@ -16,6 +16,7 @@ namespace ComponentMap
 {
     public partial class MapDialog : CommonDialog
     {
+        private event Action<string> Sas;
         public MapDialog()
         {
             InitializeComponent();
@@ -49,6 +50,18 @@ namespace ComponentMap
         public void MouseMoveEvent(object sender, MouseEventArgs e)
         {
             MouseMove(this, new EventArgs());
+        }
+
+        public void ChangeText(string Txt)
+        {
+            SelectedCountry = Txt;
+            Sas(Txt);
+        }
+
+        public void SD(Action<string> Sas)
+        {
+            this.Sas = Sas;
+            base.ShowDialog();
         }
     }
 }
