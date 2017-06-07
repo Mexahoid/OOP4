@@ -16,7 +16,8 @@ namespace ComponentMap
 {
     public partial class MapDialog : CommonDialog
     {
-        private event Action<string> Sas;
+        private event Action<string> _textChangeEvent;
+
         public MapDialog()
         {
             InitializeComponent();
@@ -35,7 +36,7 @@ namespace ComponentMap
 
         protected override bool RunDialog(IntPtr hwndOwner)
         {
-            using (MapForm f = new MapForm(this))
+            using (MapForm f = new MapForm(this, MouseMove))
                 return f.ShowDialog() == DialogResult.OK;
         }
 
@@ -55,13 +56,13 @@ namespace ComponentMap
         public void ChangeText(string Txt)
         {
             SelectedCountry = Txt;
-            Sas(Txt);
+            _textChangeEvent(Txt);
         }
 
-        public void SD(Action<string> Sas)
+        public void ShowDialog(Action<string> TextChanger)
         {
-            this.Sas = Sas;
-            base.ShowDialog();
+            _textChangeEvent = TextChanger;
+            ShowDialog();
         }
     }
 }

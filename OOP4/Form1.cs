@@ -27,20 +27,15 @@ namespace OOP4
                 _canvas.DrawImage(_tb, ClientRectangle);
             }
         }
-        
+
         private void button1_Click(object sender, EventArgs e)
         {
-            mapDialog1.SD(SetText);
+            mapDialog1.ShowDialog((string text) => { label1.Text = text; });
         }
 
         private void mapDialog1_MouseMove(object sender, EventArgs e)
         {
 
-        }
-
-        private void SetText(string Text)
-        {
-            label1.Text = Text;
         }
     }
 }

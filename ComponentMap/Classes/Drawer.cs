@@ -38,8 +38,6 @@ namespace ComponentMap
             for (int i = 0; i < _count; i++)
             {
                 _polygons[i].MouseFocus(X, Y);
-               // if (_polygons[i].Selected)
-                    //break;
             }
         }
 
@@ -51,10 +49,6 @@ namespace ComponentMap
 
         public void Draw()
         {
-          /*  for (int i = 0; i < _count; i++)
-            {
-                _polygons[i].Draw();
-            }*/
             _outerGraph.DrawImage(_btm, 0, 0);
         }
 

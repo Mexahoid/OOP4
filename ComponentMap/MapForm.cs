@@ -11,29 +11,15 @@ namespace ComponentMap
 {
     public partial class MapForm : Form
     {
-        private MapDialog md;
-        private List<Point> Arr;
+        //private List<Point> Arr;
         private Drawer _drawer;
-        private Graphics g;
-        private Graphics f;
-        private Bitmap bm;
         
-        public MapForm(MapDialog md)
+        public MapForm(MapDialog md, EventHandler MouseMove)
         {
             InitializeComponent();
-            //bm = new Bitmap(852, 560);
-            //CtrlPanel.CreateGraphics().DrawImage(bm, 0, 0);
-            //g = Graphics.FromImage(bm);
-            //f = CtrlPanel.CreateGraphics();
             _drawer = new Drawer(CtrlPanel.CreateGraphics(), ChangeText, md.ChangeText);
             _drawer.Draw();
-            this.md = md;
-            Arr = new List<Point>();
-        }
-
-        private void MapForm_MouseMove(object sender, MouseEventArgs e)
-        {
-            //md.MouseMove(sender, e);
+            //Arr = new List<Point>();
         }
 
         private void MapForm_FormClosed(object sender, FormClosedEventArgs e)
@@ -68,9 +54,6 @@ namespace ComponentMap
 
         protected override void OnPaint(PaintEventArgs e)
         {
-            //g.DrawImage(Properties.Resources.Map, 0, 0);
-            //Action();
-            //f.DrawImage(bm, 0, 0);
             _drawer.Draw();
             base.OnPaint(e);
         }
